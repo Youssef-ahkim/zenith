@@ -2,7 +2,7 @@ import { ShoppingCart, Cpu, Gauge, Monitor } from "lucide-react";
 
 export default function ProductCard({ product }) {
   return (
-    <div className="group relative rounded-3xl border border-white/5 bg-[#0a0a0a] p-5 transition-all duration-500 hover:border-blue-500/50 hover:bg-[#0f0f0f] hover:shadow-[0_0_40px_rgba(37,99,235,0.1)] cursor-pointer">
+    <div className="group relative rounded-3xl border border-white/5 bg-[#0a0a0a] p-5 transition-all duration-500 hover:border-blue-500/50 hover:bg-[#0f0f0f] cursor-pointer">
 
       {/* 1. Image Area */}
       <div className="relative mb-6 aspect-[4/3] rounded-2xl bg-[#050505]">
@@ -47,7 +47,7 @@ export default function ProductCard({ product }) {
             <span className="text-xs text-gray-500 line-through">$4,299</span>
             <span className="text-2xl font-black text-white">${product.price}</span>
           </div>
-          <button className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-black transition-all hover:bg-blue-600 hover:text-white hover:rotate-6 active:scale-90 cursor-pointer">
+          <button className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-black transition-all hover:bg-blue-600 hover:text-white active:scale-95 cursor-pointer">
             <ShoppingCart size={20} />
           </button>
         </div>

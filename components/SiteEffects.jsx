@@ -1,7 +1,10 @@
 "use client";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function SiteEffects() {
+  const pathname = usePathname();
+
   useEffect(() => {
     /* ─── Scroll Progress Bar ─── */
     const bar = document.getElementById("scroll-progress");
@@ -35,7 +38,7 @@ export default function SiteEffects() {
       window.removeEventListener("scroll", onScroll);
       observer.disconnect();
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

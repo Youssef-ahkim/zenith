@@ -19,7 +19,7 @@ export default function Nav() {
     <nav
       className={`fixed top-0 left-1/2 -translate-x-1/2 z-50 w-full max-w-[1920px] animate-nav-down transition-all duration-500 ${
         isScrolled 
-          ? "border-b border-white/10 bg-[#050505]/80 backdrop-blur-md py-2 shadow-2xl" 
+          ? "border-b border-white/10 bg-[#050505]/95 backdrop-blur-sm py-2 shadow-xl" 
           : "bg-transparent py-4"
       }`}
     >

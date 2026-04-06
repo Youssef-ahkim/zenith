@@ -20,43 +20,39 @@ body {
   --animate-p4: assemble-p4 1.5s cubic-bezier(0.19, 1, 0.22, 1) 0.4s forwards;
 }
 
-/* 2. Updated reveal keyframes to slide in from the left */
+/* 2. Updated reveal keyframes to slide in from the left (optimized for performance) */
 @keyframes reveal {
   from {
     opacity: 0;
-    transform: translateX(-100px) scale(0.98);
-    /* Starts 100px to the left */
-    filter: blur(10px);
+    transform: translateX(-20px) scale(0.98);
   }
 
   to {
     opacity: 1;
     transform: translateX(0) scale(1);
-    filter: blur(0px);
   }
 }
 
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translateX(120px) rotate(2deg);
+    transform: translateX(30px);
   }
 
   to {
     opacity: 1;
-    transform: translateX(0) rotate(0deg);
+    transform: translateX(0);
   }
 }
 
 @keyframes float {
-
   0%,
   100% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(0);
   }
 
   50% {
-    transform: translateY(-25px) rotate(-1deg);
+    transform: translateY(-10px);
   }
 }
 
@@ -116,7 +112,7 @@ body {
   transform-origin: left;
   transform: scaleX(0);
   z-index: 9999;
-  box-shadow: 0 0 12px 2px rgba(37, 99, 235, 0.7);
+  box-shadow: none;
   transition: transform 0.1s linear;
 }
 
@@ -203,5 +199,21 @@ body {
   100% {
     opacity: 1;
     transform: translate(0, 0) scale(1) rotate(0);
+  }
+}
+
+/* Obey user reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  [data-sa] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

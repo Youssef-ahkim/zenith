@@ -1,7 +1,8 @@
 "use client";
 import { useState, useMemo, useEffect, useRef } from "react";
 import ProductCard from "@/components/ProductCard";
-import { Shield } from "lucide-react";
+import { Shield, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 const IMG = "https://www.petitsprix.ma/wp-content/uploads/2024/07/Ordinateur-portable-Gaming-Asus-ROG-Strix-SCAR-18-2-To-SSD.jpg";
 
@@ -141,6 +142,11 @@ export default function Products() {
         {/* --- 1. THE HEADER --- */}
         <header data-sa="fade-up" className="px-6 py-12 border-b border-white/5">
           <div className="mx-auto max-w-7xl">
+            <Link href="/" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-white transition-colors mb-8 cursor-pointer">
+              <ArrowLeft size={16} />
+              Back to Home
+            </Link>
+
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
               <div className="space-y-4">
                 <h1 className="text-5xl md:text-8xl font-black tracking-tighter italic leading-none text-white">

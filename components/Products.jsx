@@ -4,7 +4,7 @@ export default function ProductCard({ product }) {
   return (
     <div className="group relative rounded-2xl border border-white/5 bg-white/5 p-4 transition-all duration-500 hover:border-blue-500/50 hover:bg-white/10 cursor-pointer">
       {/* Glow Effect on Hover */}
-      <div className="absolute inset-0 -z-10 bg-blue-600/0 blur-[50px] transition-all duration-500 group-hover:bg-blue-600/10" />
+      <div className="absolute inset-0 -z-10 bg-blue-600/0 transition-all duration-500 group-hover:bg-blue-600/5" />
 
       {/* Product Image */}
       <div className="relative mb-6 aspect-video overflow-hidden rounded-xl bg-[#0a0a0a]">
