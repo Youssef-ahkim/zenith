@@ -66,13 +66,19 @@ const LAPTOPS = [
   },
 ];
 
+// Stagger delays for each card (ms)
+const DELAYS = [0, 100, 200, 300, 400, 500];
+
 export default function ProductGrid() {
   return (
     <section id="explore" className="relative z-20 py-32 px-6">
       <div className="mx-auto max-w-7xl">
 
-        {/* Section Header */}
-        <div className="mb-16 flex flex-col items-center justify-between gap-6 md:flex-row md:items-end">
+        {/* Section Header — fades up on scroll */}
+        <div
+          data-sa="fade-up"
+          className="mb-16 flex flex-col items-center justify-between gap-6 md:flex-row md:items-end"
+        >
           <div className="space-y-3 text-center md:text-left">
             <h2 className="text-4xl font-black tracking-tighter text-white sm:text-5xl">
               FEATURED BEASTS
@@ -81,16 +87,25 @@ export default function ProductGrid() {
               Hand-picked performance machines for the most demanding users on earth.
             </p>
           </div>
-          <a href="/products" className="group flex items-center gap-2 text-sm font-bold text-blue-500 transition-all hover:text-blue-400 cursor-pointer">
+          <a
+            href="/products"
+            className="group flex items-center gap-2 text-sm font-bold text-blue-500 transition-all hover:text-blue-400 cursor-pointer"
+          >
             VIEW ALL PRODUCTS
             <div className="h-[2px] w-8 bg-blue-500 transition-all group-hover:w-12" />
           </a>
         </div>
 
-        {/* Product Grid */}
+        {/* Product Grid — cards stagger in on scroll */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {LAPTOPS.map((laptop) => (
-            <ProductCard key={laptop.id} product={laptop} />
+          {LAPTOPS.map((laptop, index) => (
+            <div
+              key={laptop.id}
+              data-sa="zoom-up"
+              data-sa-delay={DELAYS[index] || undefined}
+            >
+              <ProductCard product={laptop} />
+            </div>
           ))}
         </div>
 

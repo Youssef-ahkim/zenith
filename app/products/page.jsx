@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import ProductCard from "@/components/ProductCard";
 import { Shield } from "lucide-react";
 
@@ -107,13 +107,39 @@ export default function Products() {
     }));
   };
 
+  const gridRef = useRef(null);
+
+  // Re-run scroll observer whenever filtered list changes
+  useEffect(() => {
+    const els = gridRef.current?.querySelectorAll("[data-sa]") ?? [];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const delay = el.dataset.saDelay ? Number(el.dataset.saDelay) : 0;
+            setTimeout(() => el.classList.add("sa-visible"), delay);
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    els.forEach((el) => {
+      // Reset so re-filtered cards animate again
+      el.classList.remove("sa-visible");
+      observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [filteredLaptops]);
+
   return (
     <main className="min-h-screen bg-[#050505] text-white">
 
       <div className="relative mt-25">
 
         {/* --- 1. THE HEADER --- */}
-        <header className="px-6 py-12 border-b border-white/5">
+        <header data-sa="fade-up" className="px-6 py-12 border-b border-white/5">
           <div className="mx-auto max-w-7xl">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
               <div className="space-y-4">
@@ -141,7 +167,7 @@ export default function Products() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
             {/* SIDEBAR */}
-            <aside className="lg:col-span-3">
+            <aside data-sa="fade-left" className="lg:col-span-3">
               <div className="lg:sticky lg:top-32 space-y-12">
                 <FilterGroup
                   label="Manufacturer"
@@ -173,7 +199,7 @@ export default function Products() {
             </aside>
 
             {/* MAIN GRID */}
-            <div className="lg:col-span-9">
+            <div className="lg:col-span-9" ref={gridRef}>
               {filteredLaptops.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-32 text-gray-500 gap-4">
                   <p className="text-5xl">🔍</p>
@@ -187,8 +213,14 @@ export default function Products() {
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {filteredLaptops.map((laptop) => (
-                    <ProductCard key={laptop.id} product={laptop} />
+                  {filteredLaptops.map((laptop, index) => (
+                    <div
+                      key={laptop.id}
+                      data-sa="zoom-up"
+                      data-sa-delay={index * 60}
+                    >
+                      <ProductCard product={laptop} />
+                    </div>
                   ))}
                 </div>
               )}

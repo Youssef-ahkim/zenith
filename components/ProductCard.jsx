@@ -3,7 +3,7 @@ import { ShoppingCart, Cpu, Gauge, Monitor } from "lucide-react";
 export default function ProductCard({ product }) {
   return (
     <div className="group relative rounded-3xl border border-white/5 bg-[#0a0a0a] p-5 transition-all duration-500 hover:border-blue-500/50 hover:bg-[#0f0f0f] hover:shadow-[0_0_40px_rgba(37,99,235,0.1)] cursor-pointer">
-      
+
       {/* 1. Image Area */}
       <div className="relative mb-6 aspect-[4/3] rounded-2xl bg-[#050505]">
         <img
