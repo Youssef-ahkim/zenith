@@ -14,9 +14,80 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const BASE_URL = "https://zenith-ruby-eight.vercel.app";
+
 export const metadata = {
-  title: "Zenith",
-  description: "High-performance laptops engineered for creators, gamers and professionals.",
+  metadataBase: new URL(BASE_URL),
+
+  /* ── Core ── */
+  title: {
+    default: "Zenith — Premium Laptops for Creators & Gamers",
+    template: "%s | Zenith",
+  },
+  description:
+    "Discover Zenith's lineup of high-performance laptops — engineered for creators, gamers, and professionals who demand the best.",
+  keywords: [
+    "Zenith laptops",
+    "gaming laptops",
+    "creator laptops",
+    "high-performance laptops",
+    "professional laptops",
+    "buy laptops online",
+  ],
+  authors: [{ name: "Zenith" }],
+  creator: "Zenith",
+  publisher: "Zenith",
+
+  /* ── Google Search Console verification ── */
+  verification: {
+    google: "bWnqsNP-V0CMi7FzbYsPmEhBGrGtM9myyXUvGqQUrso",
+  },
+
+  /* ── Canonical ── */
+  alternates: {
+    canonical: "/",
+  },
+
+  /* ── Open Graph ── */
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: BASE_URL,
+    siteName: "Zenith",
+    title: "Zenith — Premium Laptops for Creators & Gamers",
+    description:
+      "Discover Zenith's lineup of high-performance laptops — engineered for creators, gamers, and professionals.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Zenith Premium Laptops",
+      },
+    ],
+  },
+
+  /* ── Twitter / X ── */
+  twitter: {
+    card: "summary_large_image",
+    title: "Zenith — Premium Laptops for Creators & Gamers",
+    description:
+      "High-performance laptops engineered for creators, gamers and professionals.",
+    images: ["/og-image.png"],
+  },
+
+  /* ── Robots ── */
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
