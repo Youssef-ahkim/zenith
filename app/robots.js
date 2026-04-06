@@ -1,7 +1,7 @@
 // app/robots.js
 // Generates /robots.txt via the Next.js App Router Metadata API.
 
-const BASE_URL = "https://zenith.store";
+const BASE_URL = "https://zenith-ruby-eight.vercel.app";
 
 export default function robots() {
   return {

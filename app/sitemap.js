@@ -2,7 +2,7 @@
 // Generates /sitemap.xml via the Next.js App Router Metadata API.
 // Add new static routes to `staticRoutes` and they'll be included automatically.
 
-const BASE_URL = "https://zenith.store";
+const BASE_URL = "https://zenith-ruby-eight.vercel.app";
 
 /** Static product IDs — keep in sync with your product data */
 const PRODUCT_IDS = [1, 2, 3, 4];
