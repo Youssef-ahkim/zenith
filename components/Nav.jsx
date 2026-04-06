@@ -4,10 +4,14 @@ import { Search, ShoppingCart} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ALL_LAPTOPS } from "@/lib/data";
+import { useCart } from "./CartContext";
 
 export default function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const cartCount = 0;
+  const { cartCount, cartItems } = useCart();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const cartTotal = useMemo(() => cartItems.reduce((acc, item) => acc + item.price, 0), [cartItems]);
 
   const [query, setQuery] = useState("");
   const searchInputRef = useRef(null);
@@ -112,15 +116,58 @@ export default function Nav() {
         </div>
 
         {/* 3. Icons & Cart */}
-
-          <button className="relative group text-gray-400 transition-all duration-300 hover:text-white cursor-pointer">
+        <div className="flex items-center gap-4 relative">
+          <button 
+            onClick={() => setIsCartOpen(!isCartOpen)}
+            className="relative group text-gray-400 transition-all duration-300 hover:text-white cursor-pointer"
+          >
             <ShoppingCart size={20} className="group-hover:scale-110 transition-transform" />
             {cartCount > 0 && (
-              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-blue-600 text-[10px] font-black text-white ring-2 ring-[#050505] animate-pulse">
+              <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-blue-600 text-[10px] font-black text-white ring-2 ring-[#050505] animate-pulse pointer-events-none">
                 {cartCount}
               </span>
             )}
           </button>
+
+          {/* Cart Dropdown */}
+          {isCartOpen && (
+            <div className="absolute right-0 top-full mt-5 w-80 bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_30px_80px_-15px_rgba(0,0,0,0.9)] overflow-hidden z-50 flex flex-col">
+               <div className="p-4 border-b border-white/10 flex justify-between items-center bg-[#050505]/50">
+                  <p className="text-xs font-black uppercase text-white">Your Arsenal</p>
+                  <p className="text-[10px] text-gray-500 font-bold">{cartCount} Items</p>
+               </div>
+               <div className="max-h-72 overflow-y-auto p-2">
+                  {cartItems.length === 0 ? (
+                     <p className="text-xs text-gray-500 font-bold text-center py-10 uppercase tracking-widest">Cart is empty.</p>
+                  ) : (
+                     cartItems.map((item, idx) => (
+                        <div key={idx} className="flex items-center gap-3 p-2 hover:bg-white/5 rounded-xl transition-colors">
+                          <div className="h-12 w-14 shrink-0 bg-[#050505] rounded-lg border border-white/5 p-1 flex items-center justify-center">
+                             <img src={item.image} alt={item.name} className="h-full w-full object-contain" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                             <p className="text-[11px] font-bold text-white truncate">{item.name}</p>
+                             <p className="text-[9px] text-gray-500 uppercase font-black tracking-wider mt-0.5">{item.brand}</p>
+                          </div>
+                          <p className="text-[11px] font-black text-blue-500">${item.price}</p>
+                        </div>
+                     ))
+                  )}
+               </div>
+               {cartItems.length > 0 && (
+                  <div className="p-5 border-t border-white/10 bg-white/[0.02]">
+                     <div className="flex justify-between items-center mb-4">
+                       <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Total Value</span>
+                       <span className="text-xl font-black text-white">${cartTotal.toLocaleString()}</span>
+                     </div>
+                     <button className="w-full h-12 bg-white text-black font-black text-xs uppercase rounded-xl hover:bg-blue-600 hover:text-white transition-all hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-2">
+                       Checkout Now
+                     </button>
+                  </div>
+               )}
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );

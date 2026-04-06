@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "../components/Nav";
 import SiteEffects from "../components/SiteEffects";
+import { CartProvider } from "../components/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,14 +37,16 @@ export default function RootLayout({ children }) {
         {/* Glowing scroll progress bar */}
         <div id="scroll-progress" aria-hidden="true" />
 
-        <Nav />
+        <CartProvider>
+          <Nav />
 
-        {/* Global JS: scroll-reveal + progress bar + tilt */}
-        <SiteEffects />
+          {/* Global JS: scroll-reveal + progress bar + tilt */}
+          <SiteEffects />
 
-        <main className="flex-1 flex flex-col">
-          {children}
-        </main>
+          <main className="flex-1 flex flex-col">
+            {children}
+          </main>
+        </CartProvider>
       </body>
     </html>
   );

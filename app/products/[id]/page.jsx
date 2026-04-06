@@ -1,6 +1,7 @@
 import { ALL_LAPTOPS } from "@/lib/data";
 import Link from "next/link";
 import { ArrowLeft, ShoppingCart, Cpu, Monitor, Zap, ShieldCheck } from "lucide-react";
+import AddToCartButton from "@/components/AddToCartButton";
 
 export default async function ProductPage({ params }) {
   const resolvedParams = await params;
@@ -108,10 +109,7 @@ export default async function ProductPage({ params }) {
                 <p className="text-5xl font-black">${product.price}</p>
               </div>
               
-              <button className="group flex h-16 items-center justify-center gap-4 rounded-full bg-white px-10 text-sm font-black text-black transition-all hover:bg-blue-600 hover:text-white hover:scale-105 active:scale-95 cursor-pointer">
-                ADD TO ARSENAL
-                <ShoppingCart size={18} className="transition-transform group-hover:translate-x-1" />
-              </button>
+              <AddToCartButton product={product} />
             </div>
 
           </div>
