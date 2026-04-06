@@ -1,8 +1,9 @@
 import { ShoppingCart, Cpu, Gauge, Monitor } from "lucide-react";
+import Link from "next/link";
 
 export default function ProductCard({ product }) {
   return (
-    <div className="group relative rounded-3xl border border-white/5 bg-[#0a0a0a] p-5 transition-all duration-500 hover:border-blue-500/50 hover:bg-[#0f0f0f] cursor-pointer">
+    <Link href={`/products/${product.id}`} className="group relative rounded-3xl border border-white/5 bg-[#0a0a0a] p-5 transition-all duration-500 hover:border-blue-500/50 hover:bg-[#0f0f0f] cursor-pointer block">
 
       {/* 1. Image Area */}
       <div className="relative mb-6 aspect-[4/3] rounded-2xl bg-[#050505]">
@@ -52,6 +53,6 @@ export default function ProductCard({ product }) {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -87,7 +87,7 @@ export default function Nav() {
                   {searchResults.map((p) => (
                     <Link
                       key={p.id}
-                      href="/products"
+                      href={`/products/${p.id}`}
                       onClick={() => setQuery("")}
                       className="flex gap-4 items-center p-3 hover:bg-white/5 transition-colors border-b border-white/5 last:border-0"
                     >
