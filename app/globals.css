@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+html,
+body {
+  overflow-y: auto;
+  height: auto;
+}
+
+
+
+@theme {
+  /* 1. Define your custom animations as theme variables */
+  --animate-reveal: reveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-slide-in-right: slideInRight 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-nav-down: navDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-p1: assemble-p1 1.5s cubic-bezier(0.19, 1, 0.22, 1) 0.1s forwards;
+  --animate-p2: assemble-p2 1.5s cubic-bezier(0.19, 1, 0.22, 1) 0.2s forwards;
+  --animate-p3: assemble-p3 1.5s cubic-bezier(0.19, 1, 0.22, 1) 0.3s forwards;
+  --animate-p4: assemble-p4 1.5s cubic-bezier(0.19, 1, 0.22, 1) 0.4s forwards;
+}
+
+/* 2. Updated reveal keyframes to slide in from the left */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateX(-100px) scale(0.98); /* Starts 100px to the left */
+    filter: blur(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(120px) rotate(2deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-25px) rotate(-1deg);
+  }
+}
+
+@keyframes navDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bottom of globals.css */
+.assemble-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  perspective: 1000px;
+}
+
+.piece-img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  display: block;
+  opacity: 0;
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  animation-fill-mode: forwards;
+}
+
+.p1 {
+  animation-name: assemble-p1;
+  animation-delay: 0.1s;
+}
+
+.p2 {
+  animation-name: assemble-p2;
+  animation-delay: 0.2s;
+}
+
+.p3 {
+  animation-name: assemble-p3;
+  animation-delay: 0.3s;
+}
+
+.p4 {
+  animation-name: assemble-p4;
+  animation-delay: 0.4s;
+}
+
+@keyframes assemble-p1 {
+  0% {
+    opacity: 0;
+    transform: translate(-100vw, -100vh) scale(0) rotate(-45deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0);
+  }
+}
+
+@keyframes assemble-p2 {
+  0% {
+    opacity: 0;
+    transform: translate(100vw, -100vh) scale(0) rotate(45deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0);
+  }
+}
+
+@keyframes assemble-p3 {
+  0% {
+    opacity: 0;
+    transform: translate(-100vw, 100vh) scale(0) rotate(45deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0);
+  }
+}
+
+@keyframes assemble-p4 {
+  0% {
+    opacity: 0;
+    transform: translate(100vw, 100vh) scale(0) rotate(-45deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0);
+  }
+}
